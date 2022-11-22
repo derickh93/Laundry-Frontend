@@ -31,7 +31,6 @@ export default function Login() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    try {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value)
@@ -41,18 +40,6 @@ export default function Login() {
         .catch((err) => {
           setError(err.message);
         });
-    } catch (err) {
-      if (
-        err.message ===
-        "There is no user record corresponding to this identifier. The user may have been deleted."
-      ) {
-        setError(
-          "There is no account associated with this email. Please sign up below."
-        );
-      } else {
-        setError(err.message);
-      }
-    }
 
     setLoading(false);
   }
